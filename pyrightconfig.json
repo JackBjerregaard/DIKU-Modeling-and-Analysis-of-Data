@@ -1,14 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/pyright/main/packages/pyright-internal/schemas/pyrightconfig.schema.json",
   "reportMissingImports": "warning",
-  "executionEnvironments": [
-    {
-      "root": ".",
-      "extraPaths": [
-        "/Users/jack/Library/Python/3.9/lib/python/site-packages",
-        "/Users/jack/Library/Python/3.14/lib/python/site-packages",
-        "/opt/homebrew/lib/python3.14/site-packages"
-      ]
-    }
+  "extraPaths": [
+    "/Users/jack/Library/Python/3.9/lib/python/site-packages",
+    "/Users/jack/Library/Python/3.14/lib/python/site-packages",
+    "/opt/homebrew/lib/python3.14/site-packages",
+    "/home/linuxbrew/.linuxbrew/lib/python3.14/site-packages",
+    "/home/linuxbrew/.linuxbrew/Cellar/python-matplotlib/3.10.7/libexec/lib/python3.14/site-packages",
+    "/home/jack/.local/lib/python3.14/site-packages"
   ]
 }
