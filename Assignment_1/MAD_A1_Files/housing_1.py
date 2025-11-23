@@ -30,18 +30,12 @@ test_rmse = rmse(t_test, predictions)
 print(f"b) RMSE on test set: ${test_rmse:.2f}k")
 
 # (c) visualization of results
-plt.figure(figsize=(8, 6))
-plt.scatter(t_test, predictions, alpha=0.5)
-plt.xlabel('True House Prices ($1000s)')
-plt.ylabel('Predicted House Prices ($1000s)')
-plt.title('True vs Predicted House Prices (Mean Model)')
-plt.plot([t_test.min(), t_test.max()],
-         [t_test.min(), t_test.max()],
-         'r--', lw=2, label='Perfect prediction')
-plt.legend()
-plt.grid(True, alpha=0.3)
-plt.savefig('housing_1_scatter.png', dpi=300, bbox_inches='tight')
-plt.show()
+plt.figure()
+plt.scatter(t_test, predictions)
+plt.xlabel("True price")
+plt.ylabel("Predicted price")
+plt.title("Mean Model")
+plt.savefig("housing_1_scatter.png")
 
 
 
