@@ -62,11 +62,7 @@ def loocv(X, t, lambdaVal):
 
     return numpy.mean(errors)
 
-# ========== Part a) First-order polynomial ==========
-print("=" * 60)
-print("PART A: First-order polynomial (degree=1)")
-print("=" * 60)
-
+# a)
 lambdaVals = numpy.logspace(-8, 0, 100, base=10)
 
 X = make_polynomial(x, 1)  # design matrix for first order poly
@@ -80,7 +76,6 @@ cv_errors = numpy.array(cv_errors)
 # find best lambda
 best_idx = numpy.argmin(cv_errors)
 best_lambda = lambdaVals[best_idx]
-best_cv_error = cv_errors[best_idx]
 
 # weights for lambda = 0 (no reg)
 w_no_reg = reg_lin_reg(X, t, lambdaVal=0)
@@ -88,16 +83,11 @@ w_no_reg = reg_lin_reg(X, t, lambdaVal=0)
 # best weights for best lambda
 w_best = reg_lin_reg(X, t, lambdaVal=best_lambda)
 
-# print deliverables
-print("Best lambda: %.10f" % best_lambda)
-print("CV error at best lambda: %.10f" % best_cv_error)
-print()
+print(f"Best lambda: {best_lambda:.10f}")
 print("Regression coefficients with lambda=0:")
 print(w_no_reg)
-print()
-print("Regression coefficients with lambda=%.10f:" % best_lambda)
+print(f"Regression coefficients with lambda={best_lambda:.10f}:")
 print(w_best)
-print()
 
 # plot CV error vs lambda
 plt.figure()
@@ -108,12 +98,7 @@ plt.title("CV Error vs Lambda (First-Order Polynomial)")
 plt.savefig("exercise2_part_a.png")
 plt.show()
 
-# ========== Part b) Fourth-order polynomial ==========
-print("=" * 60)
-print("PART B: Fourth-order polynomial (degree=4)")
-print("=" * 60)
-
-# create design matrix for fourth-order polynomial
+# b)
 degree = 4
 X = make_polynomial(x, degree)  # design matrix: [1, x, x^2, x^3, x^4]
 
@@ -126,7 +111,6 @@ cv_errors_4 = numpy.array(cv_errors_4)
 # find best lambda
 best_idx_4 = numpy.argmin(cv_errors_4)
 best_lambda_4 = lambdaVals[best_idx_4]
-best_cv_error_4 = cv_errors_4[best_idx_4]
 
 # weights for lambda = 0 (no reg)
 w_no_reg_4 = reg_lin_reg(X, t, lambdaVal=0)
@@ -134,16 +118,11 @@ w_no_reg_4 = reg_lin_reg(X, t, lambdaVal=0)
 # best weights for best lambda
 w_best_4 = reg_lin_reg(X, t, lambdaVal=best_lambda_4)
 
-# print deliverables
-print("Best lambda: %.10f" % best_lambda_4)
-print("CV error at best lambda: %.10f" % best_cv_error_4)
-print()
+print(f"Best lambda: {best_lambda_4:.10f}")
 print("Regression coefficients with lambda=0:")
 print(w_no_reg_4)
-print()
-print("Regression coefficients with lambda=%.10f:" % best_lambda_4)
+print(f"Regression coefficients with lambda={best_lambda_4:.10f}:")
 print(w_best_4)
-print()
 
 # plot CV error vs lambda
 plt.figure()
