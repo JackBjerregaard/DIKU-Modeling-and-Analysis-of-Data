@@ -27,13 +27,9 @@ def make_polynomial(x, degree):
 
 def reg_lin_reg(X, t, lambdaVal):
     D = X.shape[1]
-
-    # regularized regression formula
     A = X.T @ X + lambdaVal * numpy.eye(D)
     b = X.T @ t
-    w = numpy.linalg.solve(A, b)
-
-    return w
+    return numpy.linalg.solve(A, b)
 
 
 def predict(X, w):
@@ -43,23 +39,13 @@ def predict(X, w):
 def loocv(X, t, lambdaVal):
     N = X.shape[0]
     errors = []
-
     for i in range(N):
-        # removes the i-th element from the data
         X_train = numpy.delete(X, i, axis=0)
         t_train = numpy.delete(t, i, axis=0)
-
-        # use point i as test set
-        X_test = X[i : i + 1, :]  # 2d array
-        t_test = t[i] 
-
-        w = reg_lin_reg(X_train, t_train, lambdaVal)
-
-        prediction = predict(X_test, w)
-
-        error = (prediction[0, 0] - t_test[0]) ** 2
-        errors.append(error)
-
+        X_test = X[i : i + 1, :]
+        t_test = t[i]
+        prediction = predict(X_test, reg_lin_reg(X_train, t_train, lambdaVal))
+        errors.append((prediction[0, 0] - t_test[0]) ** 2)
     return numpy.mean(errors)
 
 # a)
@@ -73,9 +59,7 @@ for lam in lambdaVals:
 
 cv_errors = numpy.array(cv_errors)
 
-# find best lambda
-best_idx = numpy.argmin(cv_errors)
-best_lambda = lambdaVals[best_idx]
+best_lambda = lambdaVals[numpy.argmin(cv_errors)]
 
 # weights for lambda = 0 (no reg)
 w_no_reg = reg_lin_reg(X, t, lambdaVal=0)
@@ -83,11 +67,9 @@ w_no_reg = reg_lin_reg(X, t, lambdaVal=0)
 # best weights for best lambda
 w_best = reg_lin_reg(X, t, lambdaVal=best_lambda)
 
-print(f"Best lambda: {best_lambda:.10f}")
-print("Regression coefficients with lambda=0:")
-print(w_no_reg)
-print(f"Regression coefficients with lambda={best_lambda:.10f}:")
-print(w_best)
+print(f"a) Best lambda: {best_lambda:.10f}")
+print(f"   w(lambda=0): {w_no_reg.flatten()}")
+print(f"   w(lambda={best_lambda:.10f}): {w_best.flatten()}")
 
 # plot CV error vs lambda
 plt.figure()
@@ -108,9 +90,7 @@ for lam in lambdaVals:
 
 cv_errors_4 = numpy.array(cv_errors_4)
 
-# find best lambda
-best_idx_4 = numpy.argmin(cv_errors_4)
-best_lambda_4 = lambdaVals[best_idx_4]
+best_lambda_4 = lambdaVals[numpy.argmin(cv_errors_4)]
 
 # weights for lambda = 0 (no reg)
 w_no_reg_4 = reg_lin_reg(X, t, lambdaVal=0)
@@ -118,11 +98,9 @@ w_no_reg_4 = reg_lin_reg(X, t, lambdaVal=0)
 # best weights for best lambda
 w_best_4 = reg_lin_reg(X, t, lambdaVal=best_lambda_4)
 
-print(f"Best lambda: {best_lambda_4:.10f}")
-print("Regression coefficients with lambda=0:")
-print(w_no_reg_4)
-print(f"Regression coefficients with lambda={best_lambda_4:.10f}:")
-print(w_best_4)
+print(f"b) Best lambda: {best_lambda_4:.10f}")
+print(f"   w(lambda=0): {w_no_reg_4.flatten()}")
+print(f"   w(lambda={best_lambda_4:.10f}): {w_best_4.flatten()}")
 
 # plot CV error vs lambda
 plt.figure()
