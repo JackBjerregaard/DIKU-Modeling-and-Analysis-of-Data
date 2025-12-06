@@ -1,0 +1,7 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/pyright/main/packages/pyright-internal/schemas/pyrightconfig.schema.json",
+  "reportMissingImports": "warning",
+  "extraPaths": [
+    "/home/jack/DIKU-Modeling-and-Analysis-of-Data/Assignment_3/.venv/lib/python3.14/site-packages"
+  ]
+}
