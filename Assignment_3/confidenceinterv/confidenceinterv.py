@@ -43,8 +43,9 @@ for i in range(nexp):
     xmean = np.mean(x) # Sample mean
     a = xmean - fac2*sig/np.sqrt(n) 
     b = xmean - fac1*sig/np.sqrt(n) 
-    ac = xmean - fac2*sig/np.sqrt(n) # TODO: adapt for c)
-    bc = xmean - fac1*sig/np.sqrt(n) # TODO: adapt for c)
+    c = scipy.stats.t.ppf((1+gamma)/2, n-1)
+    ac = xmean - c*sig/np.sqrt(n)
+    bc = xmean + c*sig/np.sqrt(n)
     
     # b) plotting and counting code
     if (a <= mu) & (mu <= b):
